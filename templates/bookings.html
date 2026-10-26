@@ -2,77 +2,34 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Коворкинг — Мои брони</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background: #fafafa; color: #1a1a1a; min-height: 100vh;
-            display: flex; flex-direction: column;
-        }
-        header {
-            background: #ffffff; border-bottom: 1px solid #e5e5e5;
-            padding: 20px 60px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #111; }
-        nav { display: flex; gap: 24px; }
-        nav a { color: #444; text-decoration: none; font-size: 15px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: all 0.15s ease; }
-        nav a:hover { background: #f0f4ff; color: #2563eb; }
-
-        main { flex: 1; padding: 60px; max-width: 1000px; margin: 0 auto; width: 100%; }
-        h1 { font-size: 32px; font-weight: 700; margin-bottom: 40px; color: #111; }
-
-        .booking-list { display: flex; flex-direction: column; gap: 16px; }
-        .booking-item {
-            background: #ffffff; border: 1px solid #e5e5e5; border-radius: 12px;
-            padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.15s ease;
-        }
-        .booking-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-color: #d1d5db; }
-        .booking-info { display: flex; align-items: center; gap: 40px; font-size: 16px; }
-        .booking-place { font-weight: 600; color: #111; width: 120px; }
-        .booking-date { color: #555; width: 100px; }
-        .booking-time { color: #555; width: 100px; }
-        .btn-cancel {
-            background: transparent; color: #dc2626; border: 1px solid #dc2626;
-            padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 500;
-            cursor: pointer; transition: all 0.15s ease;
-        }
-        .btn-cancel:hover { background: #fef2f2; }
-        footer { padding: 24px 60px; text-align: center; color: #999; font-size: 13px; border-top: 1px solid #e5e5e5; background: #ffffff; }
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <header>
         <div class="logo">
-    <img src="/static/images/logo.jpg" alt="Логотип" width="30" height="30" style="vertical-align: middle; margin-right: 8px;">
-    КОВОРКИНГ
-</div>
+            <img src="/static/images/logo.jpg" alt="Логотип" width="30" height="30">
+            КОВОРКИНГ
+        </div>
         <nav>
             <a href="/workspaces">Места</a>
             <a href="/">На главную</a>
         </nav>
     </header>
-    <main>
+    <main class="list-page">
         <h1>Мои брони</h1>
-        <!-- Добавили id="bookingList" -->
-        <div class="booking-list" id="bookingList">
-            <!-- Добавили data-id="1" и onclick="cancelBooking(1)" -->
-            <div class="booking-item" data-id="1">
-                <div class="booking-info">
-                    <span class="booking-place">Место №1</span>
-                    <span class="booking-date">15.10</span>
-                    <span class="booking-time">10–12</span>
+        <div class="list" id="bookingList">
+            <div class="item" data-id="1">
+                <div class="info">
+                    <span class="name">Место №1</span>
+                    <span class="price">15.10 | 10–12</span>
                 </div>
                 <button class="btn-cancel" onclick="cancelBooking(1)">Отменить</button>
             </div>
-            <!-- Добавили data-id="2" и onclick="cancelBooking(2)" -->
-            <div class="booking-item" data-id="2">
-                <div class="booking-info">
-                    <span class="booking-place">Место №2</span>
-                    <span class="booking-date">16.10</span>
-                    <span class="booking-time">14–16</span>
+            <div class="item" data-id="2">
+                <div class="info">
+                    <span class="name">Место №2</span>
+                    <span class="price">16.10 | 14–16</span>
                 </div>
                 <button class="btn-cancel" onclick="cancelBooking(2)">Отменить</button>
             </div>
@@ -80,38 +37,19 @@
     </main>
     <footer>© 2026 Коворкинг. Курсовой проект.</footer>
 
-    <!-- ДОБАВИЛИ СКРИПТ -->
     <script>
         async function cancelBooking(bookingId) {
-            // Спрашиваем подтверждение
-            if (!confirm('Вы уверены, что хотите отменить эту бронь?')) {
-                return;
-            }
-
+            if (!confirm('Вы уверены, что хотите отменить эту бронь?')) return;
             try {
-                // Отправляем запрос на сервер (пока что он может не работать)
-                const response = await fetch(`/bookings/${bookingId}`, {
-                    method: 'DELETE'
-                });
-
+                const response = await fetch(`/bookings/${bookingId}`, { method: 'DELETE' });
                 if (response.ok) {
-                    // Если сервер ответил "ОК", удаляем карточку из HTML
-                    const item = document.querySelector(`.booking-item[data-id="${bookingId}"]`);
-                    if (item) {
-                        item.remove();
-                    }
-
-                    // Если список пуст, показываем сообщение
-                    const list = document.getElementById('bookingList');
-                    if (list.children.length === 0) {
-                        list.innerHTML = '<p style="color: #666;">У вас пока нет активных броней.</p>';
-                    }
+                    const item = document.querySelector(`.item[data-id="${bookingId}"]`);
+                    if (item) item.remove();
                 } else {
-                    alert('Не удалось отменить бронь. Попробуйте позже.');
+                    alert('Не удалось отменить бронь.');
                 }
             } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Произошла ошибка при отмене брони.');
+                alert('Ошибка сервера.');
             }
         }
     </script>

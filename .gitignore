@@ -1,0 +1,22 @@
+# Служебные файлы PyCharm
+.idea/
+*.iml
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Виртуальные окружения
+venv/
+.venv/
+env/
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Локальная база данных (если появится)
+*.sqlite
+*.db
