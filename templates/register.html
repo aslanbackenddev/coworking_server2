@@ -19,18 +19,18 @@
     <main>
         <div class="form-card">
             <h1>Регистрация</h1>
-            <form>
+            <form method="POST" action="/register">
                 <div class="form-group">
                     <label>Имя</label>
-                    <input type="text" placeholder="Ваше имя">
+                    <input type="text" name="name" required placeholder="Ваше имя">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" placeholder="example@mail.ru">
+                    <input type="email" name="email" required placeholder="example@mail.ru">
                 </div>
                 <div class="form-group">
                     <label>Пароль</label>
-                    <input type="password" placeholder="••••••••">
+                    <input type="password" name="password" required placeholder="••••••••">
                 </div>
                 <button type="submit" class="btn-submit">Создать аккаунт</button>
             </form>

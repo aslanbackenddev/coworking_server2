@@ -13,26 +13,14 @@
         </div>
         <nav>
             <a href="/workspaces">Места</a>
-            <a href="/">На главную</a>
+            <a href="/logout">Выход</a>
         </nav>
     </header>
     <main class="list-page">
         <h1>Мои брони</h1>
         <div class="list" id="bookingList">
-            <div class="item" data-id="1">
-                <div class="info">
-                    <span class="name">Место №1</span>
-                    <span class="price">15.10 | 10–12</span>
-                </div>
-                <button class="btn-cancel" onclick="cancelBooking(1)">Отменить</button>
-            </div>
-            <div class="item" data-id="2">
-                <div class="info">
-                    <span class="name">Место №2</span>
-                    <span class="price">16.10 | 14–16</span>
-                </div>
-                <button class="btn-cancel" onclick="cancelBooking(2)">Отменить</button>
-            </div>
+            <!-- Сюда контроллер вставит сгенерированный список броней -->
+            {{bookings_list}}
         </div>
     </main>
     <footer>© 2026 Коворкинг. Курсовой проект.</footer>

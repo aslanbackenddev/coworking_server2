@@ -1,3 +1,7 @@
+"""
+Контроллер для отдачи статических файлов (CSS, изображения).
+"""
+
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -11,8 +15,14 @@ MIME_TYPES = {
     ".ico": "image/x-icon",
 }
 
+
 def serve_static(environ, start_response):
-    """Отдаёт файлы из папки static (CSS, картинки)."""
+    """
+    Отдаёт файлы из папки static.
+    Определяет MIME-тип по расширению.
+
+    :return: Кортеж (тело_ответа, статус, MIME-тип).
+    """
     path = environ.get("PATH_INFO", "/")
     relative = path[len("/static/"):]
     filepath = os.path.join(STATIC_DIR, relative)

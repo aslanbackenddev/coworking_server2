@@ -13,33 +13,14 @@
         </div>
         <nav>
             <a href="/bookings">Мои брони</a>
-            <a href="/">На главную</a>
+            <a href="/logout">Выход</a>
         </nav>
     </header>
     <main class="list-page">
         <h1>Доступные места</h1>
         <div class="list">
-            <div class="item">
-                <div class="info">
-                    <span class="name">Место №1</span>
-                    <span class="price">500 ₽/час</span>
-                </div>
-                <a href="/bookings/new" class="button">Забронировать</a>
-            </div>
-            <div class="item">
-                <div class="info">
-                    <span class="name">Место №2</span>
-                    <span class="price">400 ₽/час</span>
-                </div>
-                <a href="/bookings/new" class="button">Забронировать</a>
-            </div>
-            <div class="item">
-                <div class="info">
-                    <span class="name">Место №3</span>
-                    <span class="price">600 ₽/час</span>
-                </div>
-                <a href="/bookings/new" class="button">Забронировать</a>
-            </div>
+            <!-- Сюда контроллер вставит сгенерированный список мест -->
+            {{places_list}}
         </div>
     </main>
     <footer>© 2026 Коворкинг. Курсовой проект.</footer>

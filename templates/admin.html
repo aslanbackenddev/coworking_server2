@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Коворкинг — Админ-панель</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="/static/images/logo.jpg" alt="Логотип" width="30" height="30">
+            КОВОРКИНГ (Админ)
+        </div>
+        <nav>
+            <a href="/workspaces">Места</a>
+            <a href="/logout">Выход</a>
+        </nav>
+    </header>
+    <main class="list-page">
+        <h1>Управление местами</h1>
+        <div class="form-card" style="max-width: 100%; margin: 0 0 20px 0;">
+            <form method="POST" action="/admin" style="display: flex; gap: 10px; align-items: center;">
+                <input type="hidden" name="action" value="add_place">
+                <input type="text" name="name" placeholder="Название" required style="flex: 1;">
+                <input type="text" name="description" placeholder="Описание" style="flex: 2;">
+                <input type="number" name="price" placeholder="Цена (₽)" required style="width: 120px;">
+                <button type="submit" class="btn-submit" style="width: auto;">Добавить</button>
+            </form>
+        </div>
+        <div class="list">
+            <!-- Сюда контроллер вставит список мест с кнопками удаления -->
+            {{places_list}}
+        </div>
+
+        <h1 style="margin-top: 40px;">Все брони</h1>
+        <div class="list">
+            <!-- Сюда контроллер вставит список всех броней -->
+            {{bookings_list}}
+        </div>
+    </main>
+    <footer>© 2026 Коворкинг. Курсовой проект.</footer>
+</body>
+</html>
